@@ -1,5 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from "http"
 
+const os = require('os');
+
 // Method used to handle incoming requests
 const requestListener = function (req: IncomingMessage, res: ServerResponse) {
   try {
@@ -7,6 +9,7 @@ const requestListener = function (req: IncomingMessage, res: ServerResponse) {
     if (req.method === "GET" && req.url === "/ping") {
       res.setHeader("Content-Type", "application/json")
       res.write(JSON.stringify(req.headers))
+      console.log(`Hostname: ${os.hostname()}`);
       res.end();
     // Else return HTTP 404
     } else {
